@@ -24,4 +24,8 @@
       <ProjectReference Include="..\WishList.PostgreSQL\WishList.PostgreSQL.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="CQRS\Core\" />
+    </ItemGroup>
+
 </Project>

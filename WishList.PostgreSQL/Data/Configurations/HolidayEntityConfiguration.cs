@@ -9,5 +9,8 @@ public sealed class HolidayEntityConfiguration : IEntityTypeConfiguration<Holida
     public void Configure(EntityTypeBuilder<HolidayEntity> builder)
     {
         builder.HasKey(e => e.Id);
+
+        builder
+            .HasIndex(e => e.StartDateTimestamp);
     }
 }
