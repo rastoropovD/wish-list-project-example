@@ -4,6 +4,7 @@ public sealed class HolidayEntity
 {
     public string Id { get; set; }
     public string Title { get; set; }
+    public string Description { get; set; }
     public long StartDateTimestamp { get; set; }
     public DateTime StartDate { get; set; }
 

@@ -18,5 +18,10 @@ public sealed class GuestEntityConfiguration : IEntityTypeConfiguration<GuestEnt
             .Property(e => e.IsVisited)
             .HasDefaultValue(false)
             .IsRequired();
+
+        builder
+            .HasOne(g => g.SelectedPresent)
+            .WithOne(p => p.PresentBy)
+            .IsRequired(false);
     }
 }
