@@ -1,15 +1,19 @@
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc.Controllers;
+using WishList.API.RestModels.Validators;
 using WishList.PostgreSQL.Extensions;
+using WishList.PostgreSQL.Extensions.CQRS;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder
     .Services
+    .AddValidators()
     .AddWishListData("USER ID=postgres;Password=admin;Server=localhost;Port=5432;Database=wish-list-db;Integrated Security=true;Pooling=true")
-    .AddUserCommands()
-    .AddPresentCommands()
-    .AddHolidayCommands();
+    .AddSQRS();
+
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
