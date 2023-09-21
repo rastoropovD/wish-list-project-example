@@ -12,7 +12,7 @@ using WishList.PostgreSQL.Data;
 namespace WishList.PostgreSQL.Migrations
 {
     [DbContext(typeof(WishListDbContext))]
-    [Migration("20230917155551_Initial")]
+    [Migration("20230921160547_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -135,15 +135,15 @@ namespace WishList.PostgreSQL.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("PasswordHash")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Surname")
                         .IsRequired()
                         .HasColumnType("text");
 
