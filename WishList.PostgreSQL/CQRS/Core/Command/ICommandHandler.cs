@@ -1,4 +1,4 @@
-namespace WishList.API.CQRS;
+namespace WishList.PostgreSQL.CQRS.Core.Command;
 
 public interface ICommandHandler<in TCommand> where TCommand : ICommand
 {

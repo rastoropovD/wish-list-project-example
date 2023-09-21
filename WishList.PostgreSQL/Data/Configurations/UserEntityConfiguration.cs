@@ -18,11 +18,11 @@ public sealed class UserEntityConfiguration : IEntityTypeConfiguration<UserEntit
             .HasIndex(e => e.CreatedAtTimestamp);
 
         builder
-            .Property(e => e.Name)
+            .Property(e => e.FirstName)
             .IsRequired();
 
         builder
-            .Property(e => e.Surname)
+            .Property(e => e.LastName)
             .IsRequired();
         
         builder
