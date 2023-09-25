@@ -1,3 +1,4 @@
+using WishList.PostgreSQL.CQRS.Core.Command;
 using WishList.PostgreSQL.Data;
 using WishList.PostgreSQL.Entities;
 
@@ -12,7 +13,7 @@ public sealed class CreateUserCommandHandler : ICreateUserCommandHandler
         _context = context;
     }
 
-    public async Task Handle(CreateUserCommand command)
+    async Task ICommandHandler<CreateUserCommand>.Handle(CreateUserCommand command)
     {
         DateTime now = DateTime.UtcNow;
         

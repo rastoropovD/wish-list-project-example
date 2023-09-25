@@ -37,7 +37,8 @@ public sealed class CreateUserController : ControllerBase
 
         if (!validationResult.IsValid)
         {
-            return BadRequest(validationResult.Errors.Select(e => new {e.PropertyName, e.ErrorMessage}));
+            return BadRequest(validationResult.Errors
+                .Select(e => new {e.PropertyName, e.ErrorMessage}));
         }
 
         string passwordHash = ""; // todo: process password hashing

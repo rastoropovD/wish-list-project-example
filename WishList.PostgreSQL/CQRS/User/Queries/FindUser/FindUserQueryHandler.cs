@@ -16,7 +16,8 @@ public sealed class FindUserQueryHandler : IFindUserQueryHandler
     
     public async Task<UserInfoDto?> Handle(FindUserQuery query)
     {
-        UserEntity? entity = await _context.Users.FirstOrDefaultAsync(p => p.Email == query.Email);
+        UserEntity? entity = await _context.Users
+            .FirstOrDefaultAsync(p => p.Email == query.Email);
 
         return entity != null ? new UserInfoDto(entity.Id, entity.FirstName, entity.LastName, entity.Email) : default;
     }
