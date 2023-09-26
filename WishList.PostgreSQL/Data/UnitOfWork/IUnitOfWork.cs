@@ -1,6 +1,6 @@
-using WishList.PostgreSQL.PatternsLecture.Repository;
+using WishList.PostgreSQL.Data.Repositories;
 
-namespace WishList.PostgreSQL.PatternsLecture.UnitOfWork;
+namespace WishList.PostgreSQL.Data.UnitOfWork;
 
 public interface IUnitOfWork : IAsyncDisposable
 {

@@ -1,9 +1,6 @@
-using WishList.PostgreSQL.Data;
-using WishList.PostgreSQL.Entities;
+namespace WishList.PostgreSQL.Data.Repositories.Guest;
 
-namespace WishList.PostgreSQL.PatternsLecture.Repository;
-
-public sealed class GuestRepository : IRepository
+public sealed class GuestRepository : IGuestRepository
 {
     private readonly WishListDbContext _context;
     

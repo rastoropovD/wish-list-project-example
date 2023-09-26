@@ -11,6 +11,7 @@ builder
     .Services
     .AddValidators()
     .AddWishListData("USER ID=postgres;Password=admin;Server=localhost;Port=5432;Database=wish-list-db;Integrated Security=true;Pooling=true")
+    .AddDataAccess()
     .AddSQRS();
 
 

@@ -1,22 +1,23 @@
 using WishList.PostgreSQL.CQRS.Core.Command;
-using WishList.PostgreSQL.Data;
+using WishList.PostgreSQL.Data.Repositories;
+using WishList.PostgreSQL.Data.UnitOfWork;
 using WishList.PostgreSQL.Entities;
 
 namespace WishList.PostgreSQL.CQRS.User.Commands.Create;
 
 public sealed class CreateUserCommandHandler : ICreateUserCommandHandler
 {
-    private readonly WishListDbContext _context;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public CreateUserCommandHandler(WishListDbContext context)
+    public CreateUserCommandHandler(IUnitOfWork unitOfWork)
     {
-        _context = context;
+        _unitOfWork = unitOfWork;
     }
 
     async Task ICommandHandler<CreateUserCommand>.Handle(CreateUserCommand command)
     {
         DateTime now = DateTime.UtcNow;
-        
+
         UserEntity user = new UserEntity()
         {
             Id = Guid.NewGuid().ToString(),
@@ -28,8 +29,8 @@ public sealed class CreateUserCommandHandler : ICreateUserCommandHandler
             CreatedAt = now
         };
 
-        _context.Users.Add(user);
+        await ((IUserRepository) _unitOfWork.Repository<UserEntity>()).Create(user);
 
-        await _context.SaveChangesAsync();
+        await _unitOfWork.Commit();
     }
 }

@@ -1,10 +1,9 @@
 using System.Collections.Concurrent;
 using Microsoft.EntityFrameworkCore.Storage;
-using WishList.PostgreSQL.Data;
-using WishList.PostgreSQL.PatternsLecture.Factory;
-using WishList.PostgreSQL.PatternsLecture.Repository;
+using WishList.PostgreSQL.Data.Repositories;
+using WishList.PostgreSQL.Data.Repositories.Factory;
 
-namespace WishList.PostgreSQL.PatternsLecture.UnitOfWork;
+namespace WishList.PostgreSQL.Data.UnitOfWork;
 
 public sealed class UnitOfWork : IUnitOfWork
 {

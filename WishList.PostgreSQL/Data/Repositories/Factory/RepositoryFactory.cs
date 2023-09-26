@@ -1,9 +1,10 @@
-using WishList.PostgreSQL.Data;
+using WishList.PostgreSQL.Data.Repositories.Guest;
+using WishList.PostgreSQL.Data.Repositories.Holiday;
+using WishList.PostgreSQL.Data.Repositories.Present;
 using WishList.PostgreSQL.Entities;
 using WishList.PostgreSQL.Exceptions;
-using WishList.PostgreSQL.PatternsLecture.Repository;
 
-namespace WishList.PostgreSQL.PatternsLecture.Factory;
+namespace WishList.PostgreSQL.Data.Repositories.Factory;
 
 public sealed class RepositoryFactory : IRepositoryFactory
 {
