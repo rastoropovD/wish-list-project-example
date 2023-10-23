@@ -1,5 +1,5 @@
 namespace WishList.PostgreSQL.Data.Repositories;
 
-public interface IRepository
+public interface IRepository : IAsyncDisposable
 {
 }

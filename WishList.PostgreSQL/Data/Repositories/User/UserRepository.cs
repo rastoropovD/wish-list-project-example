@@ -23,4 +23,8 @@ public sealed class UserRepository : IUserRepository
         return await _context.Users.SingleOrDefaultAsync(p => p.Email == email);
     }
 
+    public async ValueTask DisposeAsync()
+    {
+        await _context.DisposeAsync();
+    }
 }

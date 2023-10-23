@@ -1,3 +1,5 @@
+using WishList.PostgreSQL.Entities;
+
 namespace WishList.PostgreSQL.Data.Repositories.Holiday;
 
 public sealed class HolidayRepository : IHolidayRepository
@@ -9,6 +11,14 @@ public sealed class HolidayRepository : IHolidayRepository
         _context = context;
     }
 
-    // repository methods
 
+    public async Task Create(HolidayEntity holiday)
+    {
+        await _context.Holidays.AddAsync(holiday);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await _context.DisposeAsync();
+    }
 }

@@ -16,19 +16,13 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Update="appsettings.Development.json">
+      <Content Update="appsettings.Debug.json">
         <DependentUpon>appsettings.json</DependentUpon>
       </Content>
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\WishList.PostgreSQL\WishList.PostgreSQL.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Controllers\Guest\" />
-      <Folder Include="Controllers\Holiday\" />
-      <Folder Include="Controllers\Present\" />
     </ItemGroup>
 
 </Project>

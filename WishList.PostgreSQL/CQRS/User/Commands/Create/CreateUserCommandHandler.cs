@@ -5,7 +5,7 @@ using WishList.PostgreSQL.Entities;
 
 namespace WishList.PostgreSQL.CQRS.User.Commands.Create;
 
-public sealed class CreateUserCommandHandler : ICreateUserCommandHandler
+public sealed class CreateUserCommandHandler : ICommandHandler<CreateUserCommand>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -14,7 +14,7 @@ public sealed class CreateUserCommandHandler : ICreateUserCommandHandler
         _unitOfWork = unitOfWork;
     }
 
-    async Task ICommandHandler<CreateUserCommand>.Handle(CreateUserCommand command)
+    public async Task Handle(CreateUserCommand command)
     {
         DateTime now = DateTime.UtcNow;
 
@@ -32,5 +32,10 @@ public sealed class CreateUserCommandHandler : ICreateUserCommandHandler
         await ((IUserRepository) _unitOfWork.Repository<UserEntity>()).Create(user);
 
         await _unitOfWork.Commit();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await _unitOfWork.DisposeAsync();
     }
 }

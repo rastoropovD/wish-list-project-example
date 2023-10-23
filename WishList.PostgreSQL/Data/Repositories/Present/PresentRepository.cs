@@ -11,4 +11,8 @@ public sealed class PresentRepository : IPresentRepository
 
     // repository methods
 
+    public async ValueTask DisposeAsync()
+    {
+        await _context.DisposeAsync();
+    }
 }

@@ -2,9 +2,12 @@ using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using WishList.API.RestModels;
+using WishList.API.RestModels.User;
+using WishList.API.RestModels.User.Create;
 using WishList.PostgreSQL.CQRS.User.Commands.Create;
 using WishList.PostgreSQL.CQRS.User.Queries.FindUser;
 using WishList.PostgreSQL.Dtos.User;
+using WishList.PostgreSQL.MediatorImpl;
 
 namespace WishList.API.Controllers.User;
 
@@ -14,20 +17,17 @@ namespace WishList.API.Controllers.User;
 public sealed class CreateUserController : ControllerBase
 {
     private readonly IValidator<CreateUserRequest> _validator;
-    private readonly ICreateUserCommandHandler _createUserCommandHandler;
-    private readonly IFindUserQueryHandler _findUserQueryHandler;
+    private readonly IMediator _mediator;
     private readonly ILogger<CreateUserController> _logger;
 
     public CreateUserController(
         IValidator<CreateUserRequest> validator,
-        ICreateUserCommandHandler createUserCommandHandler, 
-        IFindUserQueryHandler findUserQueryHandler,
+        IMediator mediator,
         ILogger<CreateUserController> logger)
     {
         _validator = validator;
-        _createUserCommandHandler = createUserCommandHandler;
-        _findUserQueryHandler = findUserQueryHandler;
         _logger = logger;
+        _mediator = mediator;
     }
 
     [HttpPost("create")]
@@ -51,9 +51,9 @@ public sealed class CreateUserController : ControllerBase
                 request.Email,
                 passwordHash);
 
-            await _createUserCommandHandler.Handle(createUserCommand);
+            await _mediator.Send(createUserCommand);
 
-            UserInfoDto? userInfo = await _findUserQueryHandler.Handle(new FindUserQuery(request.Email));
+            UserInfoDto? userInfo = await _mediator.Send<FindUserQuery, UserInfoDto?>(new FindUserQuery(request.Email));
 
             if (userInfo != null)
             {
@@ -61,7 +61,8 @@ public sealed class CreateUserController : ControllerBase
                     userInfo.Id,
                     userInfo.FirstName,
                     userInfo.LastName,
-                    userInfo.Email);
+                    userInfo.Email,
+                    "");
 
                 return Ok(response);
             }

@@ -1,18 +1,19 @@
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc.Controllers;
+using WishList.API;
 using WishList.API.RestModels.Validators;
 using WishList.PostgreSQL.Extensions;
 using WishList.PostgreSQL.Extensions.CQRS;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder
     .Services
     .AddValidators()
-    .AddWishListData("USER ID=postgres;Password=admin;Server=localhost;Port=5432;Database=wish-list-db;Integrated Security=true;Pooling=true")
+    .AddWishListData(builder.Configuration["WishListDbConnectionString"])
     .AddDataAccess()
-    .AddSQRS();
+    .AddCQRS();
 
 
 
@@ -39,7 +40,7 @@ builder.Services.AddSwaggerGen(options =>
     options.DocInclusionPredicate((name, api) => true);
 });
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -51,6 +52,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseMiddleware<ApiAuthTokenMiddleware>();
 
 app.MapControllers();
 

@@ -1,4 +1,6 @@
 using FluentValidation;
+using WishList.API.RestModels.User;
+using WishList.API.RestModels.User.Create;
 
 namespace WishList.API.RestModels.Validators.User;
 

@@ -1,4 +1,4 @@
-namespace WishList.API.RestModels;
+namespace WishList.API.RestModels.User.Create;
 
 public sealed record CreateUserRequest
 {

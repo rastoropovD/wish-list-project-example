@@ -20,10 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="CQRS\Core\" />
-      <Folder Include="CQRS\Guest\Commands\" />
       <Folder Include="CQRS\Guest\Queries\" />
-      <Folder Include="CQRS\Holiday\Commands\" />
       <Folder Include="CQRS\Holiday\Queries\" />
       <Folder Include="CQRS\Present\Commands\" />
       <Folder Include="CQRS\Present\Queries\" />
